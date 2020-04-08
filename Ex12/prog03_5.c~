@@ -1,0 +1,8 @@
+#include <stdio.h>
+#include <math.h>
+#include "prog03_1.h"
+double GetArea (Point a1,Point a2,Point a3){
+  double S;
+  S = 1.0/2*abs((a1.x-a2.x)*(a3.y-a2.y)-(a3.x - a2.x)*(a1.y - a2.y));
+  return S;
+}

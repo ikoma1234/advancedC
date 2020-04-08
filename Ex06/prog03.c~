@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main(int argc, char *argv[]){
+
+  int i=1,j;
+  char out[100];
+
+  while(1){
+
+    for(j=0;argv[i][j]!=46;j++){
+      if(argv[i][j+1]==105&&argv[i][j+2]==110&&argv[i][j+3]==0){
+	for(j=0;argv[i][j]!=46;j++){
+	  out[j]=argv[i][j];
+	}
+	out[j+1]=105;
+	out[j+2]=110;
+	out[j+3]=32;
+	printf("%c",out[j]);
+      }
+    }
+      
+    printf("%s　->%s\n", argv[i], out);
+    i++;
+
+    if(argv[i]==NULL) break;
+
+  }
+
+  return 0;
+}

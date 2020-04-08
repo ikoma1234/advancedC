@@ -1,0 +1,2 @@
+ gcc -c -lm prog03_[2-6].c
+ gcc -lm prog03_2.o prog03_3.o prog03_4.o prog03_5.o prog03_6.o

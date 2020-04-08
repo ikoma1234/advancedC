@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "stulist.h"
+
+int main()
+{
+  int i,num,status;
+  Record data;
+
+  FILE *fp;
+
+  fp=fopen("Student1.dat","r");
+  if(fp==NULL){
+    printf("Cannot open file\n");
+    exit(2);
+  }
+
+  head=make_1node(data, NULL);
+    
+  printf("Head-\n");
+
+  while (fscanf(fp,"%d%s%d%d%d", &data.id,data.name,&data.score[0],&data.score[1],&data.score[2])==5){
+    
+    if (insert(data) == NULL) printf("Data %d is already on the list\n", data.id);
+       
+  }
+  
+  listprint();
+    
+  printf("Insert new data: (ID name score1 score2 score3) -> ");
+  while (scanf("%d%s%d%d%d", &data.id,data.name,&data.score[0],&data.score[1],&data.score[2])==5){
+    
+    if (insert(data) == NULL) printf("Data %d is already on the list\n", data.id);
+
+    listprint();
+
+    printf("Insert new data: (ID name score1 score2 score3) -> ");
+       
+  }
+
+  return 0;
+}
+
+NodePointer insert(Record keydata)
+{
+  NodePointer newnode,n;
+
+  if (finditem(keydata.id) == NULL) {    
+    for (n = head; n->next != NULL; n = n->next){}     
+    newnode = make_1node(keydata, n->next);
+    n->next = newnode;
+   
+    return newnode;   
+  }
+  else return NULL;
+}
+
+void listprint(void)
+{
+  NodePointer n;
+
+  printf("Head");
+  
+  for (n = head->next; n != NULL; n = n->next) {
+    printf(" \n- %10d %-14s %3d %3d %3d ", n->data.id, n->data.name, n->data.score[0], n->data.score[1], n->data.score[2]);
+  }
+  printf("\n");
+  
+}
+
+NodePointer finditem(int keydata)
+{
+  NodePointer n;
+
+  for (n = head; n->next != NULL; n = n->next) {
+    if (n->next->data.id == keydata) return n;
+  }
+
+  return NULL;
+}
+
+NodePointer make_1node(Record keydata, NodePointer p)
+{
+  NodePointer n;
+
+  if ((n = (NodePointer)malloc(sizeof(struct node))) == NULL) {
+    printf("Error in memory allocation\n");
+    exit(8);
+  }
+  
+  n->data = keydata;
+  n->next = p;
+
+  return n;
+}

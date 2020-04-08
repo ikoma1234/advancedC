@@ -1,0 +1,21 @@
+#include "prog03_1.h"
+#include <math.h>
+
+int IsTriangle(Point a, Point b, Point c){
+
+  double kyori1,kyori2,kyori3;
+  
+  kyori1 = GetDistance(a.x, b.x, a.y, b.y);
+  kyori2 = GetDistance(b.x, c.x, b.y, c.y);
+  kyori3 = GetDistance(c.x, a.x, c.y, a.y);
+  
+  if(((kyori1+kyori2) >= kyori3) && ((kyori2+kyori3) >= kyori1) && ((kyori3+kyori1)>=kyori2)){
+    return 1;
+  }
+  else return 0;
+  
+}
+
+double GetDistance(double x1, double x2, double y1, double y2){
+    return sqrt((double)((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)));
+}
